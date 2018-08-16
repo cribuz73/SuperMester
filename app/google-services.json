@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1061825602790",
+    "firebase_url": "https://supermester-458ef.firebaseio.com",
+    "project_id": "supermester-458ef",
+    "storage_bucket": "supermester-458ef.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1061825602790:android:363f1ef02cdb2f48",
+        "android_client_info": {
+          "package_name": "com.example.android.supermester"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1061825602790-do4bhjn0mgsua9osueipovtug7dd1uab.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.android.supermester",
+            "certificate_hash": "4264ffe69b61535d8baac413b922580a3364e9ec"
+          }
+        },
+        {
+          "client_id": "1061825602790-b33afl7cstga9ss20kumusi7fb7cskkq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwOxjjLfZYOv30zJgU3Zb_gjNymGHF6qM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1061825602790-b33afl7cstga9ss20kumusi7fb7cskkq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

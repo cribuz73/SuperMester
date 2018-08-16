@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="categories_array">
+        <item>Builders</item>
+        <item>Carpenters</item>
+        <item>Electricians</item>
+        <item>Car,bike Repairs</item>
+        <item>Gardeners</item>
+        <item>Waist disposal</item>
+        <item>Metal worker</item>
+        <item>Worker</item>
+    </string-array>
+</resources>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#9e9e9e</color>
+    <color name="colorPrimaryDark">#4e4c4c</color>
+    <color name="colorAccent">#cb059a</color>
+    <color name="legacy_primary">#ffc107</color>
+    <color name="legacy_primary_dark">#f6d66d</color>
+    <color name="holo_orange_light">#b3862a</color>
+    <color name="primary_material_light">#ffc107</color>
+
+
+
+    <color name="material_green_50">#ffecb3</color>
+    <color name="material_green_500">#ffc107</color>
+    <color name="material_green_700">#0a0a09</color>
+    <color name="material_green_a200">#000000</color>
+    <color name="material_lime_a700">#d70c10</color>
+    <color name="material_purple_a700">#d20a17</color>
+    <color name="material_gray_50">#dadad8</color>
+    <color name="material_gray_500">#9f9d95</color>
+    <color name="material_black_700">#0a0a09</color>
+
+</resources>
