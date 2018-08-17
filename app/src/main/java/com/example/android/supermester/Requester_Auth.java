@@ -25,6 +25,10 @@ public class Requester_Auth extends AppCompatActivity {
         private static final int RC_SIGN_IN = 1;
         private FirebaseAuth mFirebaseAuth;
         private FirebaseAuth.AuthStateListener mAuthStateListener;
+        private String user_UID;
+        private String user_name;
+        private String user_email;
+        private String user_phone;
 
     @BindView(R.id.textName) TextView name_tv;
     @BindView(R.id.textEmail) TextView email_tv;
@@ -56,9 +60,14 @@ public class Requester_Auth extends AppCompatActivity {
                     if (user != null){
                         Toast.makeText(Requester_Auth.this, "User logat !!!", Toast.LENGTH_LONG).show();
 
-                        name_tv.setText(user.getDisplayName());
-                        email_tv.setText(user.getEmail());
-                        phone_tv.setText(user.getPhoneNumber());
+                        user_UID = user.getUid();
+                        user_name = user.getDisplayName();
+                        user_email = user.getEmail();
+                        user_phone = user.getPhoneNumber();
+
+                        name_tv.setText(user_name);
+                        email_tv.setText(user_email);
+                        phone_tv.setText(user_phone);
 
 
                     }else{
@@ -81,6 +90,7 @@ public class Requester_Auth extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(Requester_Auth.this, JobRegistration.class);
+                    intent.putExtra("userUID", user_UID);
                     startActivity(intent);
                 }
             });

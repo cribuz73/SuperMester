@@ -1,5 +1,8 @@
 package com.example.android.supermester.ItemClasses;
 
+import java.util.Date;
+import java.util.List;
+
 public class Job {
 
     private String category;
@@ -8,16 +11,19 @@ public class Job {
     private String country;
     private String address;
     private String zip_code;
-    private String max_start;
+    private Date max_start;
+    private Date max_stop;
+    private int requestValue;
     private int validity_days;
     private boolean payment;
     private String photo_URL;
     private String requester_id;
-    private String tradesman_id;
+    private List<String> tradesman_id;
 
-public Job () {}
+    public Job() {
+    }
 
-    public Job(String category, String description, String city, String country, String address, String zip_code, String max_start, int validity_days, boolean payment, String photo_URL, String requester_id, String tradesman_id) {
+    public Job(String category, String description, String city, String country, String address, String zip_code, Date max_start, Date max_stop, int requestValue, int validity_days, boolean payment, String photo_URL, String requester_id, List<String> tradesman_id) {
         this.category = category;
         this.description = description;
         this.city = city;
@@ -25,6 +31,8 @@ public Job () {}
         this.address = address;
         this.zip_code = zip_code;
         this.max_start = max_start;
+        this.max_stop = max_stop;
+        this.requestValue = requestValue;
         this.validity_days = validity_days;
         this.payment = payment;
         this.photo_URL = photo_URL;
@@ -32,12 +40,12 @@ public Job () {}
         this.tradesman_id = tradesman_id;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
     public String getCategory() {
         return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public String getDescription() {
@@ -60,12 +68,20 @@ public Job () {}
         return zip_code;
     }
 
-    public String getMax_start() {
+    public Date getMax_start() {
         return max_start;
+    }
+
+    public Date getMax_stop() {
+        return max_stop;
     }
 
     public int getValidity_days() {
         return validity_days;
+    }
+
+    public int getRequestValue() {
+        return requestValue;
     }
 
     public boolean isPayment() {
@@ -80,7 +96,7 @@ public Job () {}
         return requester_id;
     }
 
-    public String getTradesman_id() {
+    public List<String> getTradesman_id() {
         return tradesman_id;
     }
 }
