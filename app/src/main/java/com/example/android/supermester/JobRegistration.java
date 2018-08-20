@@ -1,8 +1,6 @@
 package com.example.android.supermester;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
@@ -15,7 +13,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.android.supermester.Fragments.DatePickerFragent;
+import com.example.android.supermester.Fragments.StartDatePickerFragent;
+import com.example.android.supermester.Fragments.StopDatePickerFragent;
 import com.example.android.supermester.ItemClasses.Job;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -29,7 +28,8 @@ import butterknife.ButterKnife;
 
 public class JobRegistration extends AppCompatActivity
         implements AdapterView.OnItemSelectedListener,
-        DatePickerFragent.FragmentCallbacks {
+        StartDatePickerFragent.FragmentCallbacks,
+        StopDatePickerFragent.FragmentCallbacks{
 
     @BindView(R.id.categories_spinner)
     Spinner categorySpinner;
@@ -42,16 +42,9 @@ public class JobRegistration extends AppCompatActivity
     @BindView(R.id.stopDate)
     TextView stopDate_tv;
     private String category;
-    private String currentDate;
     private Date mCurrentDate;
     private Date dChosenStartDate;
-    private Calendar calendar;
-
-
-    private int chosenStartYear;
-    private int chosenStartMonth;
-    private int chosenStartDay;
-
+    private Date dChosenStopDate;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,7 +53,7 @@ public class JobRegistration extends AppCompatActivity
 
         ButterKnife.bind(this);
 
-        calendar = Calendar.getInstance();
+        Calendar calendar = Calendar.getInstance();
         mCurrentDate = calendar.getTime();
         String currentDate = java.text.DateFormat.getDateInstance().format(mCurrentDate);
         startDate_tv.setText(currentDate);
@@ -74,10 +67,15 @@ public class JobRegistration extends AppCompatActivity
     }
 
 
-    public void showDatePickerDialog(View v) {
-        DialogFragment newFragment = new DatePickerFragent();
-        newFragment.show(getSupportFragmentManager(), "datePicker");
+    public void startDatePickerDialog(View v) {
+        DialogFragment newFragment = new StartDatePickerFragent();
+        newFragment.show(getSupportFragmentManager(), "startDatePicker");
         }
+
+    public void stopDatePickerDialog(View v) {
+        DialogFragment newFragment = new StopDatePickerFragent();
+        newFragment.show(getSupportFragmentManager(), "stopDatePicker");
+    }
 
     public void db_registration (View v){
 
@@ -86,11 +84,7 @@ public class JobRegistration extends AppCompatActivity
         String country = " ";
         String address=imput_location.getText().toString();
         String zip_code= " ";
-     //   Date pickedStartDate = pickedStartDate();
-     //   String startDate = java.text.DateFormat.getDateInstance().format(pickedStartDate);
-     //   startDate_tv.setText(startDate);
 
-        Date pickedStopDate = pickedStopDate();
         int requestValue = 0;
         int validity_days = 0;
         boolean payment = true;
@@ -101,7 +95,7 @@ public class JobRegistration extends AppCompatActivity
 
 
 
-        Job job = new Job (category, description, city, country, address, zip_code,dChosenStartDate, pickedStopDate ,requestValue, validity_days, payment, photo_URL, requester_id, tradesman_id  );
+        Job job = new Job (category, description, city, country, address, zip_code,dChosenStartDate, dChosenStopDate ,requestValue, validity_days, payment, photo_URL, requester_id, tradesman_id  );
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("jobs").add(job);
         Toast.makeText(this, "Request registred !", Toast.LENGTH_SHORT).show();
@@ -119,40 +113,59 @@ public class JobRegistration extends AppCompatActivity
         Toast.makeText(this, "No category selected", Toast.LENGTH_SHORT).show();
     }
 
-    private void pickedStartDate (){
+  //  private void pickedStartDate (){
 
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        chosenStartYear = sharedPref.getInt("pickedYear", calendar.get(calendar.YEAR));
-        chosenStartMonth = sharedPref.getInt("pickedMonth", calendar.get(calendar.MONTH));
-        chosenStartDay = sharedPref.getInt("pickedDay", calendar.get(calendar.DAY_OF_MONTH));
-        Calendar chosenStartDate = Calendar.getInstance();
-        chosenStartDate.set(chosenStartYear,chosenStartMonth,chosenStartDay);
-        dChosenStartDate = chosenStartDate.getTime();
-        String startDate = java.text.DateFormat.getDateInstance().format(dChosenStartDate);
-        startDate_tv.setText(startDate);
+     //   SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+     //   chosenStartYear = sharedPref.getInt("pickedYear", calendar.get(calendar.YEAR));
+     //   chosenStartMonth = sharedPref.getInt("pickedMonth", calendar.get(calendar.MONTH));
+     //   chosenStartDay = sharedPref.getInt("pickedDay", calendar.get(calendar.DAY_OF_MONTH));
+     //   Calendar chosenStartDate = Calendar.getInstance();
+     //   chosenStartDate.set(chosenStartYear,chosenStartMonth,chosenStartDay);
+     //   dChosenStartDate = chosenStartDate.getTime();
+     //   String startDate = java.text.DateFormat.getDateInstance().format(dChosenStartDate);
+     //   startDate_tv.setText(startDate);
 
-    }
-    private Date pickedStopDate (){
+    //}
+  //  private Date pickedStopDate (){
 
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        int chosenStopYear = sharedPref.getInt("pickedYear", calendar.get(calendar.YEAR));
-        int chosenStopMonth = sharedPref.getInt("pickedMonth", calendar.get(calendar.MONTH));
-        int chosenStopDay = sharedPref.getInt("pickedDay", calendar.get(calendar.DAY_OF_MONTH));
-        Calendar chosenStopDate = Calendar.getInstance();
-        chosenStopDate.set(chosenStopYear,chosenStopMonth,chosenStopDay);
-        Date dChosenStopDate = chosenStopDate.getTime();
-        String stopDate = java.text.DateFormat.getDateInstance().format(dChosenStopDate);
-        stopDate_tv.setText(stopDate);
-        return  dChosenStopDate;
-    }
+//        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+ //       int chosenStopYear = sharedPref.getInt("pickedYear", calendar.get(calendar.YEAR));
+ //       int chosenStopMonth = sharedPref.getInt("pickedMonth", calendar.get(calendar.MONTH));
+ //       int chosenStopDay = sharedPref.getInt("pickedDay", calendar.get(calendar.DAY_OF_MONTH));
+ //       Calendar chosenStopDate = Calendar.getInstance();
+ //       chosenStopDate.set(chosenStopYear,chosenStopMonth,chosenStopDay);
+ //       Date dChosenStopDate = chosenStopDate.getTime();
+ //       String stopDate = java.text.DateFormat.getDateInstance().format(dChosenStopDate);
+ //       stopDate_tv.setText(stopDate);
+ //       return  dChosenStopDate;
+  //  }
 
 
     @Override
-    public void timeUpdate(int year, int month, int day) {
+    public void startTimeUpdate(int start_year, int start_month, int start_day) {
         Calendar chosenStartDate = Calendar.getInstance();
-        chosenStartDate.set(year,month,day);
+        chosenStartDate.set(start_year,start_month,start_day);
         dChosenStartDate = chosenStartDate.getTime();
         String startDate = java.text.DateFormat.getDateInstance().format(dChosenStartDate);
         startDate_tv.setText(startDate);
+        if(dChosenStartDate.compareTo(mCurrentDate)<0 ){
+            Toast.makeText(this, "Start Date has to be equal or greater than Current Date !", Toast.LENGTH_LONG).show();
+            dChosenStartDate = mCurrentDate;
+            startDate_tv.setText(java.text.DateFormat.getDateInstance().format(mCurrentDate));
+        }
+    }
+
+    @Override
+    public void stopTimeUpdate(int stop_year, int stop_month, int stop_day) {
+        Calendar chosenStopDate = Calendar.getInstance();
+        chosenStopDate.set(stop_year,stop_month,stop_day);
+        dChosenStopDate = chosenStopDate.getTime();
+        String stopDate = java.text.DateFormat.getDateInstance().format(dChosenStopDate);
+        stopDate_tv.setText(stopDate);
+        if(dChosenStopDate.compareTo(dChosenStartDate)<0 ){
+            Toast.makeText(this, "Stop Date has to be equal or greater than Start Date !", Toast.LENGTH_LONG).show();
+            dChosenStopDate = dChosenStartDate;
+            stopDate_tv.setText(java.text.DateFormat.getDateInstance().format(dChosenStartDate));
+        }
     }
 }

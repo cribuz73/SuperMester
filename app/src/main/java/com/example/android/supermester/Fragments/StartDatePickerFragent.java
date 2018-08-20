@@ -12,13 +12,13 @@ import android.widget.DatePicker;
 import java.util.Calendar;
 
 
-public class DatePickerFragent extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+public class StartDatePickerFragent extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
     int year = 0;
     int month = 0;
     int day = 0;
 
-    public DatePickerFragent() {
+    public StartDatePickerFragent() {
     }
 
     @Override
@@ -36,17 +36,17 @@ public class DatePickerFragent extends DialogFragment implements DatePickerDialo
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putInt("pickedYear", year);
-        editor.putInt("pickedMonth", month);
-        editor.putInt("pickedDay", day);
+        editor.putInt("startPickedYear", year);
+        editor.putInt("StartPickedMonth", month);
+        editor.putInt("StartPickedDay", day);
         editor.apply();
-        fragmentCallbacks.timeUpdate(year, month, day);
+        fragmentCallbacks.startTimeUpdate(year, month, day);
     }
 
     private FragmentCallbacks fragmentCallbacks;
 
     public interface FragmentCallbacks {
-        void timeUpdate (int year, int month, int day);
+        void startTimeUpdate (int year, int month, int day);
     }
 
     @Override
@@ -55,7 +55,7 @@ public class DatePickerFragent extends DialogFragment implements DatePickerDialo
         try {
             fragmentCallbacks = (FragmentCallbacks) context;
         } catch (ClassCastException e) {
-            throw new ClassCastException("Activity must implement Fragment Two.");
+            throw new ClassCastException("Activity must implement Fragment StartDatePicker");
         }
     }
 
